@@ -144,9 +144,9 @@ const attractions = [
 ];
 
 const navLinks = [
-  { href: "#wedding-details", label: "Details" },
-  { href: "#weekend-schedule", label: "Weekend" },
-  { href: "#travel-stay", label: "Travel" },
+  { href: "#details", label: "Details" },
+  { href: "#schedule", label: "Schedule" },
+  { href: "#travel", label: "Travel" },
   { href: "#registry", label: "Registry" },
 ];
 
@@ -417,7 +417,7 @@ const App: React.FC = () => {
             The Hermitage Inn
           </motion.h2>
           <motion.a
-            href="#wedding-details"
+            href="#details"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.8 }}
@@ -430,7 +430,7 @@ const App: React.FC = () => {
 
       <main className="relative z-10 px-6 pb-32 pt-10">
         <Section
-          id="wedding-details"
+          id="details"
           eyebrow="Our Celebration"
           title="The Details"
           description="Join us in Southern Vermont for a long weekend together at The Hermitage Inn."
@@ -459,7 +459,7 @@ const App: React.FC = () => {
         </Section>
 
         <Section
-          id="weekend-schedule"
+          id="schedule"
           eyebrow="A Weekend in Vermont"
           title="Weekend Schedule"
           description="From welcome drinks to goodbye brunch, here’s how we’ll be spending time together."
@@ -511,7 +511,7 @@ const App: React.FC = () => {
         </Section>
 
         <Section
-          id="travel-stay"
+          id="travel"
           eyebrow="Plan Your Stay"
           title="Travel &amp; Stay"
           description="Drive up scenic Route 100, nestle into a charming inn, and explore nearby towns."
