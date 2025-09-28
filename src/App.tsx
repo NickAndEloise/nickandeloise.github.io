@@ -1,9 +1,7 @@
 import { motion, type MotionProps } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
-const PASSWORD = "MountSnow";
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1600&q=80";
+const PASSWORD = "mountsnow";
 
 type SectionProps = {
   id: string;
@@ -248,18 +246,6 @@ const Section: React.FC<SectionProps> = ({
   );
 };
 
-const HighlightCard: React.FC<{
-  title: string;
-  subtitle: string;
-  description: string;
-}> = ({ title, subtitle, description }) => (
-  <div className="rounded-3xl border border-[#e2d6c6]/70 bg-white/90 p-8 shadow-md">
-    <p className="text-xs uppercase tracking-[0.3em] text-[#a28d7c]">{subtitle}</p>
-    <h3 className="mt-4 font-heading text-3xl text-[#2f3d35]">{title}</h3>
-    <p className="mt-3 text-sm text-[#4f5c55]">{description}</p>
-  </div>
-);
-
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
@@ -275,63 +261,66 @@ const App: React.FC = () => {
 
   return (
     <div id="top" className="relative min-h-screen bg-transparent text-[#2f3d35]">
-      <div
-        className="relative overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(180deg, rgba(7, 20, 18, 0.45), rgba(12, 27, 24, 0.4)), url(${HERO_IMAGE})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent" />
+      <div className="relative overflow-hidden bg-[#f4efe6]">
         <NavBar />
-        <header className="relative z-10 flex min-h-[80vh] flex-col items-center justify-center px-6 pb-24 pt-40 text-center text-[#f4efe6]">
+        <header className="relative z-10 flex min-h-[90vh] flex-col items-center justify-center px-6 pb-24 pt-40 text-center text-[#2f3d35]">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-sm uppercase tracking-[0.5em] text-white/80"
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="text-sm uppercase tracking-[0.5em] text-[#5a6d62]"
           >
-            The Wedding of
+            The wedding of
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 1 }}
-            className="font-heading text-6xl sm:text-7xl md:text-8xl tracking-[0.3em]"
+            transition={{ delay: 0.5, duration: 1 }}
+            className="mt-6 font-heading text-5xl sm:text-6xl md:text-7xl tracking-[0.25em]"
           >
             Nick &amp; Eloise
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.9 }}
-            className="mt-6 max-w-xl text-lg text-white/90"
+            transition={{ delay: 0.7, duration: 0.8 }}
+            className="mt-8 text-xs uppercase tracking-[0.4em] text-[#5a6d62]"
           >
-            September 6, 2026 · The Hermitage Inn · Dover, Vermont
+            will take place on
           </motion.p>
-          <motion.div
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1, duration: 0.8 }}
-            className="mt-12 grid w-full max-w-4xl gap-6 sm:grid-cols-3"
+            transition={{ delay: 0.9, duration: 0.9 }}
+            className="mt-6 font-heading text-5xl sm:text-6xl md:text-7xl"
           >
-            <HighlightCard
-              subtitle="Ceremony"
-              title="5:00 PM"
-              description="Gather lakeside for an intimate ceremony framed by the evergreens."
-            />
-            <HighlightCard
-              subtitle="Reception"
-              title="7:00 PM"
-              description="A candlelit celebration with dinner, toasts, and dancing under the stars."
-            />
-            <HighlightCard
-              subtitle="Farewell"
-              title="10:00 AM"
-              description="Sunday brunch at Dot's before farewells and travel home."
-            />
-          </motion.div>
+            September 6, 2026
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.9 }}
+            className="mt-6 text-sm uppercase tracking-[0.35em] text-[#5a6d62]"
+          >
+            in Dover, Vermont at
+          </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.3, duration: 0.9 }}
+            className="mt-6 font-heading text-4xl sm:text-5xl md:text-6xl"
+          >
+            The Hermitage Inn
+          </motion.h2>
+          <motion.a
+            href="#wedding-details"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
+            className="mt-10 text-sm font-semibold uppercase tracking-[0.35em] text-[#2f3d35] underline underline-offset-8"
+          >
+            Travel &amp; weekend details →
+          </motion.a>
         </header>
       </div>
 
@@ -340,8 +329,11 @@ const App: React.FC = () => {
           id="wedding-details"
           eyebrow="Our Celebration"
           title="The Details"
-          description="We can’t wait to welcome you to a long weekend of joy, mountain air, and unforgettable moments."
+          description="Join us in Southern Vermont for a long weekend together at The Hermitage Inn."
         >
+          <p className="text-sm leading-relaxed text-[#4f5c55] sm:text-base">
+            Dover, Vermont sits in the Deerfield Valley along Route 100, tucked between rolling hills and the Green Mountains. The Hermitage Inn is nestled right in town, and we will have the inn and its grounds to gather, share meals, and stay close together all weekend. Plan a little time to settle in before the celebrations begin.
+          </p>
           <div className="grid gap-8 sm:grid-cols-2">
             <div>
               <h3 className="font-heading text-2xl text-[#2f3d35]">Date &amp; Venue</h3>
@@ -351,6 +343,9 @@ const App: React.FC = () => {
                 </li>
                 <li>
                   <span className="font-semibold">Venue:</span> The Hermitage Inn, Dover, VT
+                </li>
+                <li>
+                  <span className="font-semibold">Setting:</span> Private inn and grounds in Dover, Vermont
                 </li>
                 <li>
                   <span className="font-semibold">Ceremony:</span> 5:00 PM • Garden Lawn
@@ -367,10 +362,16 @@ const App: React.FC = () => {
                   <span className="font-semibold">Dress Code:</span> Formal attire with cozy layers for cool evenings.
                 </li>
                 <li>
+                  <span className="font-semibold">Getting There:</span> Drive along Route 100 into Dover before turning up to the inn.
+                </li>
+                <li>
                   <span className="font-semibold">Parking &amp; Transportation:</span> Shuttle &amp; valet options will be shared soon.
                 </li>
                 <li>
-                  <span className="font-semibold">Weather:</span> Early September can be crisp—bring a wrap for stargazing.
+                  <span className="font-semibold">Local Flavor:</span> Arrive early for coffee, bakeries, and local breweries along Route 100 in Dover.
+                </li>
+                <li>
+                  <span className="font-semibold">Weather:</span> Early September can be crisp—pack a wrap for later in the night.
                 </li>
               </ul>
             </div>
