@@ -82,7 +82,7 @@ const schedule: DaySchedule[] = [
         title: "Reception",
         location: "The Hermitage Inn",
         description:
-          "Dinner, toasts, and plenty of dancing under the tented pavilion—dress to sparkle!",
+          "Dinner, toasts, and plenty of dancing under the tented pavilion. Bring your best moves!",
       },
       {
         time: "10:00 PM – late",
@@ -240,7 +240,7 @@ const NavBar: React.FC = () => {
         </a>
         <button
           type="button"
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#304136]/20 text-[#2b3a33] transition-colors hover:bg-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#304136] md:hidden"
+          className="flex h-10 w-10 items-center justify-center text-[#2b3a33] transition-colors hover:bg-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#304136] md:hidden"
           aria-expanded={isMenuOpen}
           aria-controls="primary-navigation"
           onClick={() => setIsMenuOpen((open) => !open)}
@@ -326,7 +326,7 @@ const Section: React.FC<SectionProps> = ({
   return (
     <motion.section
       id={id}
-      className="texture-overlay mx-auto my-24 max-w-4xl rounded-[36px] border border-[#e2d6c6]/70 bg-[#fffdf8]/80 px-12 py-14 shadow-xl scroll-m-24"
+      className="texture-overlay mx-auto sm:my-24 my-12 max-w-4xl rounded-[36px] border border-[#e2d6c6]/70 bg-[#fffdf8]/80 px-8 sm:px-12 py-14 shadow-xl scroll-m-32 sm:scroll-m-24"
       {...anim}
     >
       <div className={headerWrapperClasses}>
@@ -367,7 +367,7 @@ const App: React.FC = () => {
     >
       <div className="relative overflow-hidden bg-[#f4efe6]">
         <NavBar />
-        <header className="relative z-10 flex min-h-[90vh] flex-col items-center justify-center px-6 pb-24 pt-40 text-center text-[#2f3d35]">
+        <header className="relative z-10 flex min-h-screen flex-col items-center justify-center px-6 md:pb-24 pb-12 pt-24 text-center text-[#2f3d35]">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -421,7 +421,7 @@ const App: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.8 }}
-            className="mt-10 text-sm font-semibold uppercase tracking-[0.35em] text-[#2f3d35] underline underline-offset-8"
+            className="mt-10 text-sm md:font-semibold uppercase md:tracking-[0.35em] text-[#2f3d35] underline underline-offset-8"
           >
             Travel &amp; weekend details →
           </motion.a>
@@ -472,7 +472,7 @@ const App: React.FC = () => {
             />
             <div className="space-y-12">
               {schedule.map((day) => (
-                <div key={day.day} className="relative pl-6">
+                <div key={day.day} className="relative sm:pl-6 pl-1">
                   <span className="absolute -left-6.5 -top-1.5 flex h-7 w-7 -translate-x-1/2 items-center justify-center rounded-full border border-[#c9b8a4] bg-[#fdf9f2] font-heading text-xs uppercase text-[#7a6c5b]">
                     ★
                   </span>
