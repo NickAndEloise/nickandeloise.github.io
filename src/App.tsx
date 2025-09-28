@@ -356,7 +356,7 @@ const App: React.FC = () => {
           description="Join us in Southern Vermont for a long weekend together at The Hermitage Inn."
         >
           <p className="text-sm leading-relaxed text-[#4f5c55] sm:text-base">
-            Dover, Vermont sits in the Deerfield Valley along Route 100, surrounded by the rolling hills of the Green Mountains. The Hermitage Inn is tucked away in the woods outside town, and we will have the inn and its grounds to gather, share meals, and celebrate together all weekend. Plan a little time to settle in before the celebrations begin.
+            Dover, Vermont sits in the Deerfield Valley along Route 100, surrounded by the rolling hills of the Green Mountains. We will have The Hermitage Inn and its grounds to gather, share meals, and celebrate together all weekend.
           </p>
           <div className="mt-8 space-y-4">
             {arrivalDetails.map((detail) => (
