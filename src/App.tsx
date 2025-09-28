@@ -1,4 +1,5 @@
-import { motion, type MotionProps } from "framer-motion";
+import clsx from "clsx";
+import { AnimatePresence, motion, type MotionProps } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import passwordBg from "./assets/password-bg.png";
 import { FallLeaf } from "./icons/FallLeaf";
@@ -32,7 +33,7 @@ const arrivalDetails = [
   {
     title: "Parking & Transportation",
     detail:
-      "Shuttle and valet details will follow—there will be plenty of space for guests arriving by car.",
+      "Shuttle and valet details will follow— there will be plenty of space for guests arriving by car.",
   },
   {
     title: "Weather",
@@ -48,7 +49,7 @@ const schedule: DaySchedule[] = [
     location: "Beer Naked",
     events: [
       {
-        time: "6:00 – 9:00 PM",
+        time: "6:00 - 9:00 PM",
         title: "Welcome Party",
         description:
           "Settle into Vermont with wood-fired pizzas, local brews, and sweeping mountain views as we kick off the festivities.",
@@ -61,25 +62,25 @@ const schedule: DaySchedule[] = [
     location: "The Hermitage Inn",
     events: [
       {
-        time: "5:00 – 6:00 PM",
+        time: "5:00 - 6:00 PM",
         title: "Ceremony",
         description:
           "Join us lakeside for vows framed by the Green Mountains. Arrive early to soak in the scenery!",
       },
       {
-        time: "6:00 – 7:00 PM",
+        time: "6:00 - 7:00 PM",
         title: "Cocktail Hour",
         description:
           "Sip signature drinks and sample New England bites as the sun dips behind the valley.",
       },
       {
-        time: "7:00 – 10:00 PM",
+        time: "7:00 - 10:00 PM",
         title: "Reception",
         description:
           "Dinner, toasts, and plenty of dancing under the tented pavilion. Bring your best moves!",
       },
       {
-        time: "10:00 PM – late",
+        time: "10:00 PM - late",
         title: "After Party",
         description:
           "Nightcaps, late-night bites, and a cozy lounge to keep the celebration going.",
@@ -105,7 +106,7 @@ const stayOptions = [
   {
     title: "The White House Inn",
     detail:
-      "Room block reserved under Nick & Eloise – please mention when booking.",
+      "Room block reserved under Nick & Eloise— please mention when booking.",
   },
   {
     title: "Local Airbnbs",
@@ -123,7 +124,7 @@ const travelTips = [
   {
     title: "Fly into NYC",
     detail:
-      "JFK, LGA, and EWR offer plenty of flights—expect a scenic 4-hour drive north.",
+      "JFK, LGA, and EWR offer plenty of flights— expect a scenic 4-hour drive north.",
   },
 ];
 
@@ -215,78 +216,135 @@ const PasswordGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock }) => {
 
 const NavBar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const mobileMenuId = "mobile-navigation";
+
+  useEffect(() => {
+    const updateVisibility = () => {
+      setHasScrolled(window.scrollY > 0);
+    };
+
+    // Run once on page load in case it opened already scrolled
+    updateVisibility();
+
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+    };
+  }, []);
 
   return (
-    <motion.nav
-      className="fixed inset-x-0 top-0 z-50 px-6"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6, duration: 0.8 }}
-    >
-      <div className="relative mx-auto mt-6 flex max-w-4xl items-center justify-between rounded-full border border-white/40 bg-white/70 px-6 py-4 text-sm uppercase tracking-[0.3em] text-[#304136] shadow-lg backdrop-blur">
-        <a
-          href="#top"
-          className="font-heading text-base tracking-[0.4em] text-[#2b3a33]"
+    <AnimatePresence>
+      <motion.div
+        key="nav-container"
+        className="pointer-events-none fixed inset-x-0 top-0 z-50 flex justify-center px-6 pt-8"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.div
+          className="pointer-events-auto relative flex w-full justify-center"
+          initial={{ maxWidth: 320 }}
+          animate={{ maxWidth: 820 }}
+          exit={{ maxWidth: 320 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          Nick &amp; Eloise
-        </a>
-        <button
-          type="button"
-          className="flex h-10 w-10 items-center justify-center text-[#2b3a33] transition-colors hover:bg-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#304136] md:hidden"
-          aria-expanded={isMenuOpen}
-          aria-controls="primary-navigation"
-          onClick={() => setIsMenuOpen((open) => !open)}
-        >
-          <span className="sr-only">Toggle navigation</span>
-          <svg
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
+          <motion.nav
+            layout
+            className={clsx(
+              "flex w-full items-center rounded-full text-[#304136] border-white/40 transition-colors px-6 h-12 text-sm uppercase tracking-[0.3em]",
+              hasScrolled
+                ? "border bg-white/70 justify-between shadow-lg backdrop-blur"
+                : "justify-center"
+            )}
+            transition={{
+              layout: { duration: 0.6 },
+            }}
           >
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="18" x2="20" y2="18" />
-          </svg>
-        </button>
-        <ul
-          id="primary-navigation"
-          className="hidden items-center gap-6 text-xs md:flex"
-        >
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <a
-                className="transition-colors hover:text-[#51665b]"
-                href={link.href}
+            <motion.a
+              layout
+              href="#top"
+              className={clsx(
+                "font-heading text-[#2b3a33] transition-colors text-base tracking-[0.4em]",
+                hasScrolled ? "block" : "hidden"
+              )}
+            >
+              Nick &amp; Eloise
+            </motion.a>
+            <AnimatePresence initial={false}>
+              <motion.div
+                key="nav-actions"
+                layout
+                className="flex items-center gap-6"
+                initial={{ opacity: 0, x: 16 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 16 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-        {isMenuOpen && (
-          <div className="absolute right-3 top-[calc(100%+0.75rem)] w-48 rounded-2xl border border-white/60 bg-white/95 p-4 text-xs text-[#2b3a33] shadow-xl md:hidden">
-            <ul className="flex flex-col gap-3">
-              {navLinks.map((link) => (
-                <li key={`mobile-${link.href}`}>
-                  <a
-                    className="block w-full rounded-full px-4 py-2 text-center transition-colors hover:bg-[#f0ebe2]"
-                    href={link.href}
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
-    </motion.nav>
+                <motion.button
+                  key="menu-button"
+                  type="button"
+                  layout
+                  className="rounded-full px-5 py-2 text-[0.65rem] uppercase tracking-[0.6em] text-[#2b3a33] transition-colors hover:bg-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#304136] md:hidden"
+                  aria-expanded={isMenuOpen}
+                  aria-controls={mobileMenuId}
+                  aria-haspopup="true"
+                  onClick={() => setIsMenuOpen((open) => !open)}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  Menu
+                </motion.button>
+                <motion.ul
+                  key="primary-navigation"
+                  id="primary-navigation"
+                  className="hidden items-center gap-6 text-xs md:flex"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.25, delay: 0.05 }}
+                >
+                  {navLinks.map((link) => (
+                    <motion.li key={link.href} layout>
+                      <a
+                        className="transition-colors hover:text-[#51665b]"
+                        href={link.href}
+                      >
+                        {link.label}
+                      </a>
+                    </motion.li>
+                  ))}
+                </motion.ul>
+              </motion.div>
+            </AnimatePresence>
+          </motion.nav>
+          {isMenuOpen && (
+            <div
+              id={mobileMenuId}
+              className="absolute top-[calc(100%+0.75rem)] w-full rounded-3xl border border-white/60 bg-white/70 backdrop-blur p-4 text-sm text-[#2b3a33] shadow-xl md:hidden"
+            >
+              <ul className="flex flex-col gap-3">
+                {navLinks.map((link) => (
+                  <li key={`mobile-${link.href}`}>
+                    <a
+                      className="block w-full rounded-full px-4 py-2 text-center transition-colors hover:bg-[#f0ebe2]"
+                      href={link.href}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 
@@ -318,7 +376,7 @@ const Section: React.FC<SectionProps> = ({
   return (
     <motion.section
       id={id}
-      className="texture-overlay mx-auto sm:my-24 my-12 max-w-4xl rounded-[36px] border border-[#e2d6c6]/70 bg-[#fffdf8]/80 px-8 sm:px-12 py-14 shadow-xl scroll-m-32 sm:scroll-m-24"
+      className="texture-overlay mx-auto sm:my-24 my-12 max-w-4xl rounded-3xl border border-[#e2d6c6]/70 bg-[#fffdf8]/80 px-8 sm:px-12 py-14 shadow-xl scroll-m-32 sm:scroll-m-24"
       {...anim}
     >
       <div className={headerWrapperClasses}>
