@@ -386,7 +386,7 @@ const App: React.FC = () => {
             <ul className="space-y-10">
               {schedule.map((item) => (
                 <li key={`${item.day}-${item.title}`} className="relative pl-6">
-                  <span className="absolute left-[-35px] top-1 flex h-7 w-7 items-center justify-center rounded-full border border-[#c9b8a4] bg-[#fdf9f2] font-heading text-xs uppercase text-[#7a6c5b]">
+                  <span className="absolute -left-6 top-1 flex h-7 w-7 -translate-x-1/2 items-center justify-center rounded-full border border-[#c9b8a4] bg-[#fdf9f2] font-heading text-xs uppercase text-[#7a6c5b]">
                     ★
                   </span>
                   <p className="text-xs uppercase tracking-[0.3em] text-[#a28d7c]">{item.day}</p>
