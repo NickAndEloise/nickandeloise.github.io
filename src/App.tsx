@@ -468,7 +468,7 @@ const App: React.FC = () => {
                       {day.dressCode}
                     </span>
                   </div>
-                  <div className="mt-3 font-heading text-base">
+                  <div className="mt-1 font-heading text-base">
                     <span className="uppercase text-[#705640]">Location: </span>
                     <span className="mt-1 italic text-[#2f3d35]">
                       {day.location}
