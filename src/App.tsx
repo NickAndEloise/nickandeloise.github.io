@@ -42,7 +42,7 @@ const arrivalDetails = [
 
 const schedule: DaySchedule[] = [
   {
-    day: "Friday, September 5",
+    day: "Saturday, September 5",
     dressCode: "New England Cocktail",
     events: [
       {
@@ -55,7 +55,7 @@ const schedule: DaySchedule[] = [
     ],
   },
   {
-    day: "Saturday, September 6",
+    day: "Sunday, September 6",
     dressCode: "Formal",
     events: [
       {
@@ -89,7 +89,7 @@ const schedule: DaySchedule[] = [
     ],
   },
   {
-    day: "Sunday, September 7",
+    day: "Monday, September 7",
     dressCode: "Casual",
     events: [
       {
