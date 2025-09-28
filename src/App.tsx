@@ -115,6 +115,13 @@ const attractions = [
   "The Vermont Country Deli",
 ];
 
+const navLinks = [
+  { href: "#wedding-details", label: "Details" },
+  { href: "#weekend-schedule", label: "Weekend" },
+  { href: "#travel-stay", label: "Travel" },
+  { href: "#registry", label: "Registry" },
+];
+
 const PasswordGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock }) => {
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -184,42 +191,73 @@ const PasswordGate: React.FC<{ onUnlock: () => void }> = ({ onUnlock }) => {
   );
 };
 
-const NavBar: React.FC = () => (
-  <motion.nav
-    className="fixed inset-x-0 top-0 z-50 px-6"
-    initial={{ opacity: 0, y: -20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.6, duration: 0.8 }}
-  >
-    <div className="mx-auto mt-6 flex max-w-4xl items-center justify-between rounded-full border border-white/40 bg-white/70 px-6 py-4 text-sm uppercase tracking-[0.3em] text-[#304136] shadow-lg backdrop-blur">
-      <a href="#top" className="font-heading text-base tracking-[0.4em] text-[#2b3a33]">
-        Nick &amp; Eloise
-      </a>
-      <ul className="flex items-center gap-6 text-xs">
-        <li>
-          <a className="transition-colors hover:text-[#51665b]" href="#wedding-details">
-            Details
-          </a>
-        </li>
-        <li>
-          <a className="transition-colors hover:text-[#51665b]" href="#weekend-schedule">
-            Weekend
-          </a>
-        </li>
-        <li>
-          <a className="transition-colors hover:text-[#51665b]" href="#travel-stay">
-            Travel
-          </a>
-        </li>
-        <li>
-          <a className="transition-colors hover:text-[#51665b]" href="#registry">
-            Registry
-          </a>
-        </li>
-      </ul>
-    </div>
-  </motion.nav>
-);
+const NavBar: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <motion.nav
+      className="fixed inset-x-0 top-0 z-50 px-6"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.6, duration: 0.8 }}
+    >
+      <div className="relative mx-auto mt-6 flex max-w-4xl items-center justify-between rounded-full border border-white/40 bg-white/70 px-6 py-4 text-sm uppercase tracking-[0.3em] text-[#304136] shadow-lg backdrop-blur">
+        <a href="#top" className="font-heading text-base tracking-[0.4em] text-[#2b3a33]">
+          Nick &amp; Eloise
+        </a>
+        <button
+          type="button"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-[#304136]/20 text-[#2b3a33] transition-colors hover:bg-white/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#304136] md:hidden"
+          aria-expanded={isMenuOpen}
+          aria-controls="primary-navigation"
+          onClick={() => setIsMenuOpen((open) => !open)}
+        >
+          <span className="sr-only">Toggle navigation</span>
+          <svg
+            className="h-5 w-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="4" y1="6" x2="20" y2="6" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="18" x2="20" y2="18" />
+          </svg>
+        </button>
+        <ul id="primary-navigation" className="hidden items-center gap-6 text-xs md:flex">
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <a className="transition-colors hover:text-[#51665b]" href={link.href}>
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+        {isMenuOpen && (
+          <div className="absolute right-3 top-[calc(100%+0.75rem)] w-48 rounded-2xl border border-white/60 bg-white/95 p-4 text-xs text-[#2b3a33] shadow-xl md:hidden">
+            <ul className="flex flex-col gap-3">
+              {navLinks.map((link) => (
+                <li key={`mobile-${link.href}`}>
+                  <a
+                    className="block w-full rounded-full px-4 py-2 text-center transition-colors hover:bg-[#f0ebe2]"
+                    href={link.href}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </motion.nav>
+  );
+};
 
 const Section: React.FC<SectionProps> = ({
   id,
