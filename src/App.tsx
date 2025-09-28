@@ -21,6 +21,22 @@ type ScheduleItem = {
   description?: string;
 };
 
+const arrivalDetails = [
+  {
+    title: "Getting There",
+    detail:
+      "Drive along Route 100 into Dover before turning up to the inn. Give yourself time to enjoy the mountain views on the way in.",
+  },
+  {
+    title: "Parking & Transportation",
+    detail: "Shuttle and valet details will follow—there will be plenty of space for guests arriving by car.",
+  },
+  {
+    title: "Weather",
+    detail: "Early September can be crisp in the evenings. Pack a wrap or jacket to stay cozy once the sun sets.",
+  },
+];
+
 const schedule: ScheduleItem[] = [
   {
     day: "Friday, September 5",
@@ -332,49 +348,18 @@ const App: React.FC = () => {
           description="Join us in Southern Vermont for a long weekend together at The Hermitage Inn."
         >
           <p className="text-sm leading-relaxed text-[#4f5c55] sm:text-base">
-            Dover, Vermont sits in the Deerfield Valley along Route 100, tucked between rolling hills and the Green Mountains. The Hermitage Inn is nestled right in town, and we will have the inn and its grounds to gather, share meals, and stay close together all weekend. Plan a little time to settle in before the celebrations begin.
+            Dover, Vermont sits in the Deerfield Valley along Route 100, surrounded by the rolling hills of the Green Mountains. The Hermitage Inn is tucked away in the woods outside town, and we will have the inn and its grounds to gather, share meals, and celebrate together all weekend. Plan a little time to settle in before the celebrations begin.
           </p>
-          <div className="grid gap-8 sm:grid-cols-2">
-            <div>
-              <h3 className="font-heading text-2xl text-[#2f3d35]">Date &amp; Venue</h3>
-              <ul className="mt-4 space-y-3 text-sm sm:text-base">
-                <li>
-                  <span className="font-semibold">Date:</span> September 6, 2026
-                </li>
-                <li>
-                  <span className="font-semibold">Venue:</span> The Hermitage Inn, Dover, VT
-                </li>
-                <li>
-                  <span className="font-semibold">Setting:</span> Private inn and grounds in Dover, Vermont
-                </li>
-                <li>
-                  <span className="font-semibold">Ceremony:</span> 5:00 PM • Garden Lawn
-                </li>
-                <li>
-                  <span className="font-semibold">Reception:</span> 6:00 PM • Tented Pavilion
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-heading text-2xl text-[#2f3d35]">Dress &amp; Arrival</h3>
-              <ul className="mt-4 space-y-3 text-sm sm:text-base">
-                <li>
-                  <span className="font-semibold">Dress Code:</span> Formal attire with cozy layers for cool evenings.
-                </li>
-                <li>
-                  <span className="font-semibold">Getting There:</span> Drive along Route 100 into Dover before turning up to the inn.
-                </li>
-                <li>
-                  <span className="font-semibold">Parking &amp; Transportation:</span> Shuttle &amp; valet options will be shared soon.
-                </li>
-                <li>
-                  <span className="font-semibold">Local Flavor:</span> Arrive early for coffee, bakeries, and local breweries along Route 100 in Dover.
-                </li>
-                <li>
-                  <span className="font-semibold">Weather:</span> Early September can be crisp—pack a wrap for later in the night.
-                </li>
-              </ul>
-            </div>
+          <div className="mt-8 space-y-4">
+            {arrivalDetails.map((detail) => (
+              <div
+                key={detail.title}
+                className="rounded-2xl border border-[#e2d6c6]/60 bg-white/80 p-6 shadow-sm"
+              >
+                <h3 className="font-heading text-xl text-[#2f3d35]">{detail.title}</h3>
+                <p className="mt-2 text-sm text-[#4f5c55] sm:text-base">{detail.detail}</p>
+              </div>
+            ))}
           </div>
         </Section>
 
@@ -385,6 +370,9 @@ const App: React.FC = () => {
           description="From welcome drinks to goodbye brunch, here’s how we’ll be spending time together."
           align="left"
         >
+          <div className="mb-8 rounded-2xl border border-[#e2d6c6]/60 bg-white/70 p-6 text-sm text-[#4f5c55] sm:text-base">
+            <span className="font-semibold text-[#2f3d35]">Dress Code:</span> Formal attire with cozy layers for cool evenings.
+          </div>
           <div className="relative border-l border-[#d2c5b3] pl-6">
             <div className="absolute left-[-5px] top-0 h-full border-l border-[#d2c5b3]" aria-hidden />
             <ul className="space-y-10">
