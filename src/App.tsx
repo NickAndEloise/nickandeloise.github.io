@@ -540,7 +540,7 @@ const App: React.FC = () => {
                 ))}
               </div>
             </div>
-            <div className="space-y-4 md:col-span-2">
+            <div className="space-y-6 md:col-span-2">
               <h3 className="font-heading text-2xl text-[#2f3d35]">
                 Arrival Details
               </h3>
