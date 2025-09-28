@@ -13,12 +13,17 @@ type SectionProps = {
   animation?: MotionProps;
 };
 
-type ScheduleItem = {
-  day: string;
+type ScheduleEvent = {
   time: string;
   title: string;
   location: string;
   description?: string;
+};
+
+type DaySchedule = {
+  day: string;
+  dressCode: string;
+  events: ScheduleEvent[];
 };
 
 const arrivalDetails = [
@@ -37,51 +42,63 @@ const arrivalDetails = [
   },
 ];
 
-const schedule: ScheduleItem[] = [
+const schedule: DaySchedule[] = [
   {
     day: "Friday, September 5",
-    time: "6:00 – 9:00 PM",
-    title: "Welcome Party",
-    location: "Beer Naked",
-    description:
-      "Settle into Vermont with wood-fired pizzas, local brews, and sweeping mountain views as we kick off the festivities.",
+    dressCode: "New England Cocktail",
+    events: [
+      {
+        time: "6:00 – 9:00 PM",
+        title: "Welcome Party",
+        location: "Beer Naked",
+        description:
+          "Settle into Vermont with wood-fired pizzas, local brews, and sweeping mountain views as we kick off the festivities.",
+      },
+    ],
   },
   {
     day: "Saturday, September 6",
-    time: "5:00 – 6:00 PM",
-    title: "Ceremony",
-    location: "The Hermitage Inn Garden",
-    description: "Join us lakeside for vows framed by the Green Mountains. Arrive early to soak in the scenery!",
-  },
-  {
-    day: "Saturday, September 6",
-    time: "6:00 – 7:00 PM",
-    title: "Cocktail Hour",
-    location: "The Hermitage Inn Terrace",
-    description:
-      "Sip signature drinks and sample New England bites as the sun dips behind the valley.",
-  },
-  {
-    day: "Saturday, September 6",
-    time: "7:00 – 10:00 PM",
-    title: "Reception",
-    location: "The Hermitage Inn",
-    description: "Dinner, toasts, and plenty of dancing under the tented pavilion—dress to sparkle!",
-  },
-  {
-    day: "Saturday, September 6",
-    time: "10:00 PM – late",
-    title: "After Party",
-    location: "The Hermitage Inn Speakeasy",
-    description: "Nightcaps, late-night bites, and a cozy lounge to keep the celebration going.",
+    dressCode: "Formal",
+    events: [
+      {
+        time: "5:00 – 6:00 PM",
+        title: "Ceremony",
+        location: "The Hermitage Inn Garden",
+        description: "Join us lakeside for vows framed by the Green Mountains. Arrive early to soak in the scenery!",
+      },
+      {
+        time: "6:00 – 7:00 PM",
+        title: "Cocktail Hour",
+        location: "The Hermitage Inn Terrace",
+        description:
+          "Sip signature drinks and sample New England bites as the sun dips behind the valley.",
+      },
+      {
+        time: "7:00 – 10:00 PM",
+        title: "Reception",
+        location: "The Hermitage Inn",
+        description: "Dinner, toasts, and plenty of dancing under the tented pavilion—dress to sparkle!",
+      },
+      {
+        time: "10:00 PM – late",
+        title: "After Party",
+        location: "The Hermitage Inn Speakeasy",
+        description: "Nightcaps, late-night bites, and a cozy lounge to keep the celebration going.",
+      },
+    ],
   },
   {
     day: "Sunday, September 7",
-    time: "10:00 AM",
-    title: "Farewell Brunch",
-    location: "Dot's of Dover",
-    description:
-      "Before you hit the road, join us for Vermont maple pancakes and one more round of hugs.",
+    dressCode: "Come as you are",
+    events: [
+      {
+        time: "10:00 AM",
+        title: "Farewell Brunch",
+        location: "Dot's of Dover",
+        description:
+          "Before you hit the road, join us for Vermont maple pancakes and one more round of hugs.",
+      },
+    ],
   },
 ];
 
@@ -416,28 +433,36 @@ const App: React.FC = () => {
           description="From welcome drinks to goodbye brunch, here’s how we’ll be spending time together."
           align="left"
         >
-          <div className="mb-8 rounded-2xl border border-[#e2d6c6]/60 bg-white/70 p-6 text-sm text-[#4f5c55] sm:text-base">
-            <span className="font-semibold text-[#2f3d35]">Dress Code:</span> Formal attire with cozy layers for cool evenings.
-          </div>
           <div className="relative border-l border-[#d2c5b3] pl-6">
             <div className="absolute left-[-5px] top-0 h-full border-l border-[#d2c5b3]" aria-hidden />
-            <ul className="space-y-10">
-              {schedule.map((item) => (
-                <li key={`${item.day}-${item.title}`} className="relative pl-6">
-                  <span className="absolute left-[-35px] top-1 flex h-7 w-7 items-center justify-center rounded-full border border-[#c9b8a4] bg-[#fdf9f2] font-heading text-xs uppercase text-[#7a6c5b]">
-                    ★
+            <div className="space-y-12">
+              {schedule.map((day) => (
+                <div key={day.day} className="relative pl-6">
+                  <span className="absolute left-[-35px] top-1 flex h-9 w-9 items-center justify-center rounded-full border border-[#c9b8a4] bg-[#fdf9f2] font-heading text-sm uppercase tracking-[0.2em] text-[#7a6c5b]">
+                    ✷
                   </span>
-                  <p className="text-xs uppercase tracking-[0.3em] text-[#a28d7c]">{item.day}</p>
-                  <h3 className="mt-3 font-heading text-3xl text-[#2f3d35]">{item.title}</h3>
-                  <p className="mt-1 text-sm font-semibold text-[#4f5c55]">
-                    {item.time} · {item.location}
-                  </p>
-                  {item.description && (
-                    <p className="mt-3 text-sm text-[#4f5c55]">{item.description}</p>
-                  )}
-                </li>
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#a28d7c]">{day.day}</p>
+                  <div className="mt-3">
+                    <p className="font-heading text-[0.65rem] uppercase tracking-[0.4em] text-[#a28d7c]">Dress Code</p>
+                    <p className="mt-1 text-base italic text-[#2f3d35]">{day.dressCode}</p>
+                  </div>
+                  <ul className="mt-6 space-y-6">
+                    {day.events.map((event) => (
+                      <li key={`${day.day}-${event.title}`} className="relative pl-6">
+                        <span className="absolute left-[-26px] top-1 text-[#a28d7c]">✦</span>
+                        <h3 className="font-heading text-2xl text-[#2f3d35]">{event.title}</h3>
+                        <p className="mt-1 text-sm font-semibold text-[#4f5c55]">
+                          {event.time} · {event.location}
+                        </p>
+                        {event.description && (
+                          <p className="mt-3 text-sm text-[#4f5c55]">{event.description}</p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </Section>
 
