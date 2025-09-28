@@ -1,6 +1,7 @@
 import { motion, type MotionProps } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import passwordBg from "./assets/password-bg.png";
+import { FallLeaf } from "./icons/FallLeaf";
 
 const PASSWORD = "mountsnow";
 
@@ -455,7 +456,7 @@ const App: React.FC = () => {
               {schedule.map((day) => (
                 <div key={day.day} className="relative sm:pl-6 pl-1">
                   <span className="absolute -left-6.5 -top-1.5 flex h-7 w-7 -translate-x-1/2 items-center justify-center rounded-full border border-[#c9b8a4] bg-[#fdf9f2] font-heading text-xs uppercase text-[#7a6c5b]">
-                    ★
+                    <FallLeaf className="p-1 fill-[#c9b8a4]" />
                   </span>
                   <p className="text-xs uppercase tracking-[0.3em] text-[#705640]">
                     {day.day}
