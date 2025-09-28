@@ -14,12 +14,17 @@ type SectionProps = {
   animation?: MotionProps;
 };
 
-type ScheduleItem = {
-  day: string;
+type ScheduleEvent = {
   time: string;
   title: string;
   location: string;
   description?: string;
+};
+
+type DaySchedule = {
+  day: string;
+  dressCode: string;
+  events: ScheduleEvent[];
 };
 
 const arrivalDetails = [
@@ -40,54 +45,66 @@ const arrivalDetails = [
   },
 ];
 
-const schedule: ScheduleItem[] = [
+const schedule: DaySchedule[] = [
   {
     day: "Friday, September 5",
-    time: "6:00 – 9:00 PM",
-    title: "Welcome Party",
-    location: "Beer Naked",
-    description:
-      "Settle into Vermont with wood-fired pizzas, local brews, and sweeping mountain views as we kick off the festivities.",
+    dressCode: "New England Cocktail",
+    events: [
+      {
+        time: "6:00 – 9:00 PM",
+        title: "Welcome Party",
+        location: "Beer Naked",
+        description:
+          "Settle into Vermont with wood-fired pizzas, local brews, and sweeping mountain views as we kick off the festivities.",
+      },
+    ],
   },
   {
     day: "Saturday, September 6",
-    time: "5:00 – 6:00 PM",
-    title: "Ceremony",
-    location: "The Hermitage Inn Garden",
-    description:
-      "Join us lakeside for vows framed by the Green Mountains. Arrive early to soak in the scenery!",
-  },
-  {
-    day: "Saturday, September 6",
-    time: "6:00 – 7:00 PM",
-    title: "Cocktail Hour",
-    location: "The Hermitage Inn Terrace",
-    description:
-      "Sip signature drinks and sample New England bites as the sun dips behind the valley.",
-  },
-  {
-    day: "Saturday, September 6",
-    time: "7:00 – 10:00 PM",
-    title: "Reception",
-    location: "The Hermitage Inn",
-    description:
-      "Dinner, toasts, and plenty of dancing under the tented pavilion—dress to sparkle!",
-  },
-  {
-    day: "Saturday, September 6",
-    time: "10:00 PM – late",
-    title: "After Party",
-    location: "The Hermitage Inn Speakeasy",
-    description:
-      "Nightcaps, late-night bites, and a cozy lounge to keep the celebration going.",
+    dressCode: "Formal",
+    events: [
+      {
+        time: "5:00 – 6:00 PM",
+        title: "Ceremony",
+        location: "The Hermitage Inn Garden",
+        description:
+          "Join us lakeside for vows framed by the Green Mountains. Arrive early to soak in the scenery!",
+      },
+      {
+        time: "6:00 – 7:00 PM",
+        title: "Cocktail Hour",
+        location: "The Hermitage Inn Terrace",
+        description:
+          "Sip signature drinks and sample New England bites as the sun dips behind the valley.",
+      },
+      {
+        time: "7:00 – 10:00 PM",
+        title: "Reception",
+        location: "The Hermitage Inn",
+        description:
+          "Dinner, toasts, and plenty of dancing under the tented pavilion—dress to sparkle!",
+      },
+      {
+        time: "10:00 PM – late",
+        title: "After Party",
+        location: "The Hermitage Inn Tavern",
+        description:
+          "Nightcaps, late-night bites, and a cozy lounge to keep the celebration going.",
+      },
+    ],
   },
   {
     day: "Sunday, September 7",
-    time: "10:00 AM",
-    title: "Farewell Brunch",
-    location: "Dot's of Dover",
-    description:
-      "Before you hit the road, join us for Vermont maple pancakes and one more round of hugs.",
+    dressCode: "Casual",
+    events: [
+      {
+        time: "10:00 AM",
+        title: "Farewell Brunch",
+        location: "Dot's Restaurant",
+        description:
+          "Before you hit the road, join us for Vermont maple pancakes and one more round of hugs.",
+      },
+    ],
   },
 ];
 
@@ -291,17 +308,15 @@ const Section: React.FC<SectionProps> = ({
   animation,
 }) => {
   const defaultAnimation: MotionProps = {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
+    initial: { opacity: 0 },
+    whileInView: { opacity: 1 },
     transition: { duration: 0.8 },
     viewport: { once: true, amount: 0.2 },
   };
 
   const anim = animation || defaultAnimation;
   const headerWrapperClasses =
-    align === "left"
-      ? "mx-auto w-full flex flex-col gap-5 text-left md:mx-0"
-      : "mx-auto flex max-w-2xl flex-col gap-5 text-center";
+    "mx-auto flex max-w-2xl flex-col gap-5 text-center";
 
   const contentWrapperClasses =
     align === "left"
@@ -311,7 +326,7 @@ const Section: React.FC<SectionProps> = ({
   return (
     <motion.section
       id={id}
-      className="texture-overlay mx-auto my-24 max-w-4xl rounded-[36px] border border-[#e2d6c6]/70 bg-[#fffdf8]/80 px-8 py-14 shadow-xl"
+      className="texture-overlay mx-auto my-24 max-w-4xl rounded-[36px] border border-[#e2d6c6]/70 bg-[#fffdf8]/80 px-12 py-14 shadow-xl scroll-m-24"
       {...anim}
     >
       <div className={headerWrapperClasses}>
@@ -348,7 +363,7 @@ const App: React.FC = () => {
   return (
     <div
       id="top"
-      className="relative min-h-screen bg-transparent text-[#2f3d35]"
+      className="relative min-h-screen bg-transparent text-[#705640]"
     >
       <div className="relative overflow-hidden bg-[#f4efe6]">
         <NavBar />
@@ -450,38 +465,48 @@ const App: React.FC = () => {
           description="From welcome drinks to goodbye brunch, here’s how we’ll be spending time together."
           align="left"
         >
-          <div className="mb-8 rounded-2xl border border-[#e2d6c6]/60 bg-white/70 p-6 text-sm text-[#4f5c55] sm:text-base">
-            <span className="font-semibold text-[#2f3d35]">Dress Code:</span>{" "}
-            Formal attire with cozy layers for cool evenings.
-          </div>
           <div className="relative border-l border-[#d2c5b3] pl-6">
             <div
               className="absolute left-[-5px] top-0 h-full border-l border-[#d2c5b3]"
               aria-hidden
             />
-            <ul className="space-y-10">
-              {schedule.map((item) => (
-                <li key={`${item.day}-${item.title}`} className="relative pl-6">
+            <div className="space-y-12">
+              {schedule.map((day) => (
+                <div key={day.day} className="relative pl-6">
                   <span className="absolute -left-6.5 -top-1.5 flex h-7 w-7 -translate-x-1/2 items-center justify-center rounded-full border border-[#c9b8a4] bg-[#fdf9f2] font-heading text-xs uppercase text-[#7a6c5b]">
                     ★
                   </span>
-                  <p className="text-xs uppercase tracking-[0.3em] text-[#a28d7c]">
-                    {item.day}
+                  <p className="text-xs uppercase tracking-[0.3em] text-[#705640]">
+                    {day.day}
                   </p>
-                  <h3 className="mt-3 font-heading text-3xl text-[#2f3d35]">
-                    {item.title}
-                  </h3>
-                  <p className="mt-1 text-sm font-semibold text-[#4f5c55]">
-                    {item.time} · {item.location}
-                  </p>
-                  {item.description && (
-                    <p className="mt-3 text-sm text-[#4f5c55]">
-                      {item.description}
-                    </p>
-                  )}
-                </li>
+                  <div className="mt-3 font-heading text-base">
+                    <span className="uppercase text-[#705640]">
+                      Dress Code:{" "}
+                    </span>
+                    <span className="mt-1 italic text-[#2f3d35]">
+                      {day.dressCode}
+                    </span>
+                  </div>
+                  <ul className="mt-4 space-y-6">
+                    {day.events.map((event) => (
+                      <li key={`${day.day}-${event.title}`}>
+                        <h3 className="font-heading text-2xl text-[#2f3d35]">
+                          {event.title}
+                        </h3>
+                        <p className="mt-1 text-sm font-semibold text-[#4f5c55]">
+                          {event.time} · {event.location}
+                        </p>
+                        {event.description && (
+                          <p className="mt-3 text-sm text-[#4f5c55]">
+                            {event.description}
+                          </p>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         </Section>
 
@@ -489,7 +514,7 @@ const App: React.FC = () => {
           id="travel-stay"
           eyebrow="Plan Your Stay"
           title="Travel &amp; Stay"
-          description="Make a weekend of it—nestle into a charming inn, explore nearby towns, and savor everything Vermont has to offer."
+          description="Drive up scenic Route 100, nestle into a charming inn, and explore nearby towns."
           align="left"
         >
           <div className="grid gap-8 md:grid-cols-2">
@@ -541,7 +566,7 @@ const App: React.FC = () => {
                     key={attraction}
                     className="flex items-center gap-2 rounded-full border border-[#e2d6c6]/60 bg-white/70 px-4 py-2"
                   >
-                    <span className="text-[#a28d7c]">✦</span>
+                    <span className="text-[#705640]">✦</span>
                     {attraction}
                   </li>
                 ))}
