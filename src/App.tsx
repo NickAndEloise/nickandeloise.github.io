@@ -222,7 +222,15 @@ const Section: React.FC<SectionProps> = ({
   };
 
   const anim = animation || defaultAnimation;
-  const alignmentClass = align === "left" ? "text-left" : "text-center";
+  const headerWrapperClasses =
+    align === "left"
+      ? "mx-auto w-full flex flex-col gap-5 text-left md:mx-0"
+      : "mx-auto flex max-w-2xl flex-col gap-5 text-center";
+
+  const contentWrapperClasses =
+    align === "left"
+      ? "mx-auto mt-10 w-full text-[17px] leading-relaxed text-[#3e4b45] md:mx-0"
+      : "mx-auto mt-10 max-w-3xl text-[17px] leading-relaxed text-[#3e4b45]";
 
   return (
     <motion.section
@@ -230,7 +238,7 @@ const Section: React.FC<SectionProps> = ({
       className="texture-overlay mx-auto my-24 max-w-4xl rounded-[36px] border border-[#e2d6c6]/70 bg-[#fffdf8]/80 px-8 py-14 shadow-xl"
       {...anim}
     >
-      <div className={`mx-auto flex max-w-2xl flex-col gap-5 ${alignmentClass}`}>
+      <div className={headerWrapperClasses}>
         {eyebrow && (
           <span className="text-xs uppercase tracking-[0.4em] text-[#9d8c7c]">
             {eyebrow}
@@ -239,7 +247,7 @@ const Section: React.FC<SectionProps> = ({
         <h2 className="font-heading text-4xl md:text-5xl text-[#2f3d35]">{title}</h2>
         {description && <p className="text-base text-[#4f5c55]">{description}</p>}
       </div>
-      <div className="mx-auto mt-10 max-w-3xl text-[17px] leading-relaxed text-[#3e4b45]">
+      <div className={contentWrapperClasses}>
         {children}
       </div>
     </motion.section>
@@ -442,20 +450,20 @@ const App: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <div>
-                <h3 className="font-heading text-2xl text-[#2f3d35]">Local Favorites</h3>
-                <ul className="mt-4 grid grid-cols-1 gap-2 text-sm text-[#4f5c55] sm:grid-cols-2">
-                  {attractions.map((attraction) => (
-                    <li
-                      key={attraction}
-                      className="flex items-center gap-2 rounded-full border border-[#e2d6c6]/60 bg-white/70 px-4 py-2"
-                    >
-                      <span className="text-[#a28d7c]">✦</span>
-                      {attraction}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            </div>
+            <div className="md:col-span-2">
+              <h3 className="font-heading text-2xl text-[#2f3d35]">Local Favorites</h3>
+              <ul className="mt-4 grid grid-cols-1 gap-2 text-sm text-[#4f5c55] sm:grid-cols-2 md:grid-cols-3">
+                {attractions.map((attraction) => (
+                  <li
+                    key={attraction}
+                    className="flex items-center gap-2 rounded-full border border-[#e2d6c6]/60 bg-white/70 px-4 py-2"
+                  >
+                    <span className="text-[#a28d7c]">✦</span>
+                    {attraction}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </Section>
