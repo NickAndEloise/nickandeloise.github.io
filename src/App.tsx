@@ -468,10 +468,12 @@ const App: React.FC = () => {
                       {day.dressCode}
                     </span>
                   </div>
-                  <div className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#705640]">
-                    Location
+                  <div className="mt-3 font-heading text-base">
+                    <span className="uppercase text-[#705640]">Location: </span>
+                    <span className="mt-1 italic text-[#2f3d35]">
+                      {day.location}
+                    </span>
                   </div>
-                  <p className="text-sm text-[#4f5c55]">{day.location}</p>
                   <ul className="mt-4 space-y-6">
                     {day.events.map((event) => (
                       <li key={`${day.day}-${event.title}`}>
