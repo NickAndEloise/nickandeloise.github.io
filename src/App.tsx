@@ -17,13 +17,13 @@ type SectionProps = {
 type ScheduleEvent = {
   time: string;
   title: string;
-  location: string;
   description?: string;
 };
 
 type DaySchedule = {
   day: string;
   dressCode: string;
+  location: string;
   events: ScheduleEvent[];
 };
 
@@ -44,11 +44,11 @@ const schedule: DaySchedule[] = [
   {
     day: "Saturday, September 5",
     dressCode: "New England Cocktail",
+    location: "Beer Naked",
     events: [
       {
         time: "6:00 – 9:00 PM",
         title: "Welcome Party",
-        location: "Beer Naked",
         description:
           "Settle into Vermont with wood-fired pizzas, local brews, and sweeping mountain views as we kick off the festivities.",
       },
@@ -57,32 +57,29 @@ const schedule: DaySchedule[] = [
   {
     day: "Sunday, September 6",
     dressCode: "Formal",
+    location: "The Hermitage Inn",
     events: [
       {
         time: "5:00 – 6:00 PM",
         title: "Ceremony",
-        location: "The Hermitage Inn Garden",
         description:
           "Join us lakeside for vows framed by the Green Mountains. Arrive early to soak in the scenery!",
       },
       {
         time: "6:00 – 7:00 PM",
         title: "Cocktail Hour",
-        location: "The Hermitage Inn Terrace",
         description:
           "Sip signature drinks and sample New England bites as the sun dips behind the valley.",
       },
       {
         time: "7:00 – 10:00 PM",
         title: "Reception",
-        location: "The Hermitage Inn",
         description:
           "Dinner, toasts, and plenty of dancing under the tented pavilion. Bring your best moves!",
       },
       {
         time: "10:00 PM – late",
         title: "After Party",
-        location: "The Hermitage Inn Tavern",
         description:
           "Nightcaps, late-night bites, and a cozy lounge to keep the celebration going.",
       },
@@ -91,11 +88,11 @@ const schedule: DaySchedule[] = [
   {
     day: "Monday, September 7",
     dressCode: "Casual",
+    location: "The Hermitage Inn",
     events: [
       {
         time: "10:00 AM",
         title: "Farewell Brunch",
-        location: "Dot's Restaurant",
         description:
           "Before you hit the road, join us for Vermont maple pancakes and one more round of hugs.",
       },
@@ -471,6 +468,10 @@ const App: React.FC = () => {
                       {day.dressCode}
                     </span>
                   </div>
+                  <div className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-[#705640]">
+                    Location
+                  </div>
+                  <p className="text-sm text-[#4f5c55]">{day.location}</p>
                   <ul className="mt-4 space-y-6">
                     {day.events.map((event) => (
                       <li key={`${day.day}-${event.title}`}>
@@ -478,7 +479,7 @@ const App: React.FC = () => {
                           {event.title}
                         </h3>
                         <p className="mt-1 text-sm font-semibold text-[#4f5c55]">
-                          {event.time} · {event.location}
+                          {event.time}
                         </p>
                         {event.description && (
                           <p className="mt-3 text-sm text-[#4f5c55]">
