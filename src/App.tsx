@@ -502,7 +502,7 @@ const App: React.FC = () => {
           align="left"
         >
           <div className="grid gap-8 md:grid-cols-2">
-            <div className="space-y-6">
+            <div className="space-y-4">
               <h3 className="font-heading text-2xl text-[#2f3d35]">
                 Where to Stay
               </h3>
@@ -522,7 +522,7 @@ const App: React.FC = () => {
                 ))}
               </div>
             </div>
-            <div className="space-y-6">
+            <div className="space-y-4">
               <h3 className="font-heading text-2xl text-[#2f3d35]">
                 Getting There
               </h3>
@@ -540,7 +540,7 @@ const App: React.FC = () => {
                 ))}
               </div>
             </div>
-            <div className="space-y-6 md:col-span-2">
+            <div className="space-y-4 md:col-span-2">
               <h3 className="font-heading text-2xl text-[#2f3d35]">
                 Arrival Details
               </h3>
