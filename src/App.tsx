@@ -29,11 +29,6 @@ type DaySchedule = {
 
 const arrivalDetails = [
   {
-    title: "Getting There",
-    detail:
-      "Drive along Route 100 into Dover before turning up to the inn. Give yourself time to enjoy the mountain views on the way in.",
-  },
-  {
     title: "Parking & Transportation",
     detail:
       "Shuttle and valet details will follow—there will be plenty of space for guests arriving by car.",
@@ -144,7 +139,6 @@ const attractions = [
 ];
 
 const navLinks = [
-  { href: "#details", label: "Details" },
   { href: "#schedule", label: "Schedule" },
   { href: "#travel", label: "Travel" },
   { href: "#registry", label: "Registry" },
@@ -417,47 +411,37 @@ const App: React.FC = () => {
             The Hermitage Inn
           </motion.h2>
           <motion.a
-            href="#details"
+            href="#schedule"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.8 }}
             className="mt-10 text-sm md:font-semibold uppercase md:tracking-[0.35em] text-[#2f3d35] underline underline-offset-8"
           >
-            Travel &amp; weekend details →
+            <span className="inline-block align-middle ml-2">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 22 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path
+                  d="M6 9l5 5 5-5"
+                  stroke="#2f3d35"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  fill="none"
+                />
+              </svg>
+            </span>
           </motion.a>
         </header>
       </div>
 
       <main className="relative z-10 px-6 pb-32 pt-10">
-        <Section
-          id="details"
-          eyebrow="Our Celebration"
-          title="The Details"
-          description="Join us in Southern Vermont for a long weekend together at The Hermitage Inn."
-        >
-          <p className="text-sm leading-relaxed text-[#4f5c55] sm:text-base">
-            Dover, Vermont sits in the Deerfield Valley along Route 100,
-            surrounded by the rolling hills of the Green Mountains. We will have
-            The Hermitage Inn and its grounds to gather, share meals, and
-            celebrate together all weekend.
-          </p>
-          <div className="mt-8 space-y-4">
-            {arrivalDetails.map((detail) => (
-              <div
-                key={detail.title}
-                className="rounded-2xl border border-[#e2d6c6]/60 bg-white/80 p-6 shadow-sm"
-              >
-                <h3 className="font-heading text-xl text-[#2f3d35]">
-                  {detail.title}
-                </h3>
-                <p className="mt-2 text-sm text-[#4f5c55] sm:text-base">
-                  {detail.detail}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Section>
-
         <Section
           id="schedule"
           eyebrow="A Weekend in Vermont"
@@ -555,6 +539,24 @@ const App: React.FC = () => {
                   </div>
                 ))}
               </div>
+            </div>
+            <div className="space-y-4 md:col-span-2">
+              <h3 className="font-heading text-2xl text-[#2f3d35]">
+                Arrival Details
+              </h3>
+              {arrivalDetails.map((detail) => (
+                <div
+                  key={detail.title}
+                  className="rounded-2xl border border-[#e2d6c6]/60 bg-white/80 p-6 shadow-sm"
+                >
+                  <h3 className="font-heading text-xl text-[#2f3d35]">
+                    {detail.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-[#4f5c55] sm:text-base">
+                    {detail.detail}
+                  </p>
+                </div>
+              ))}
             </div>
             <div className="md:col-span-2">
               <h3 className="font-heading text-2xl text-[#2f3d35]">
