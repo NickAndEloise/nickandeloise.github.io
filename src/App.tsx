@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { AnimatePresence, motion, type MotionProps } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import passwordBg from "./assets/password-bg.png";
+import poppies from "./assets/poppies.png";
 import { FallLeaf } from "./icons/FallLeaf";
 
 const PASSWORD = "mountsnow";
@@ -652,7 +653,8 @@ const App: React.FC = () => {
         </Section>
       </main>
 
-      <footer className="relative z-10 bg-[#1a2a24] py-10 text-center text-[#f4efe6]">
+      <footer className="relative z-10 bg-[#1a2a24] py-10 text-center text-[#f4efe6] flex items-center flex-col">
+        <img src={poppies} className="size-20" alt="poppies" />
         <p className="font-heading text-xl tracking-[0.4em] uppercase">
           Nick &amp; Eloise
         </p>
